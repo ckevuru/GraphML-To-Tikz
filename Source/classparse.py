@@ -59,7 +59,9 @@ class ParseTikz:
         if exflag == True:
             return exflag, exception, ''
         else:
-            return exflag, exception, self.drawTikzgraph(max_xe, min_xe, max_ye, min_ye, node_list, edge_list)
+            contents = self.drawTikzgraph(max_xe, min_xe, max_ye, min_ye, node_list, edge_list)
+            os.remove(self.file_output)
+            return exflag, exception, contents
 
     def getNonEmptyLabel(self, nodelabel):
         '''Function for finding non empty text label if it exists.

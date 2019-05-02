@@ -179,7 +179,6 @@ class GeneralWidget(QWidget):
         '''
         fileName = self.lineEdit.text()
         extension = os.path.splitext(fileName)[1]
-        # and extension == '.graphml':
         if self.model.isValid(fileName) and extension == '.graphml':
             self.model.setFileName(self.lineEdit.text())
             if self.type == 'simple':
@@ -228,7 +227,6 @@ class GeneralWidget(QWidget):
     def browseSlot(self):
         ''' Called when the user presses the Browse button
         '''
-        # self.debugPrint( "Browse button pressed" )
         options = QtWidgets.QFileDialog.Options()
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
@@ -240,6 +238,10 @@ class GeneralWidget(QWidget):
         if fileName:
             self.debugPrint("setting file name: " + fileName)
             self.model.setFileName(fileName)
+            try:
+                self.window.close()
+            except:
+                pass
             self.refreshAll()
 
     @pyqtSlot()
@@ -267,10 +269,6 @@ class GeneralWidget(QWidget):
         if self.plainTextEdit.toPlainText() != '':
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
-            # os.remove(flin+'.pdf')
-            # os.remove(flin+'-crop.pdf')
-            # os.remove(flin+'.aux')
-            # os.remove(flin+'.log')
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
             fileout = flin + '.tex'
@@ -317,13 +315,11 @@ class GeneralWidget(QWidget):
             self.window.show()
             self.debugPrint("Preview loaded.")
             try:
+                os.remove(flin+'.tex')
                 os.remove(tail+'.log')
                 os.remove(tail + '.aux')
                 os.remove(tail + '.pdf')
                 os.remove(tail+'-crop.pdf')
-                os.remove(tail+'.tex')
-                #os.remove(tail+'.jpg')
-                os.remove('temp_out.tex')
             except:
                 pass
         else:
@@ -414,7 +410,6 @@ class DragLineEdit(QtWidgets.QLineEdit):
         '''
         for url in event.mimeData().urls():
             print(url.toLocalFile())
-        #extension = os.path.splitext(url.toLocalFile())[1]
         self.setText(url.toLocalFile())
 
 class PreviewWindow(QWidget):

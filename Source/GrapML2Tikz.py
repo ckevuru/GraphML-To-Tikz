@@ -2,13 +2,13 @@
 Main file to start the module. This file is the first part of the module.
 '''
 
+import sys
+
+from model import Model
+from shutil import copyfile
+from maingui import Ui_MainWindow
 
 from PyQt5 import QtWidgets
-from maingui import Ui_MainWindow
-from shutil import copyfile
-import sys
-from model import Model
-
 
 class MainWindowUIClass(Ui_MainWindow):
     def __init__(self):

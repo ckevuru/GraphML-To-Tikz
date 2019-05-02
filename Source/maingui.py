@@ -2,7 +2,7 @@
 This file handles the overall gui for the module.
 '''
 
-import os.path
+import os
 import qdarkgraystyle
 
 from model import Model
@@ -82,7 +82,6 @@ class Ui_MainWindow(QObject):
         '''Function to handle current tab change.
         '''
         self.tab = self.tabWidget.widget(i)
-
 
 if __name__ == "__main__":
     import sys

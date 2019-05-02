@@ -108,7 +108,10 @@ To generate Tikz using this module :
 
 ## Authors
 
-  [**Chandra Kiran Evuru**](https://github.com/ckevuru) - (CS15BTECH11012)
+* [**Chandra Kiran Evuru**](https://github.com/ckevuru) - (CS15BTECH11012)
+* [**Nisaanth Natarajan**](https://github.com/nissy321) - (CS15BTECH11027)
+* [**Ram Nagesh**](https://github.com/ram-98) - (CS15BTECH11002)
+* [**Akhil Naik**](https://github.com/cs15btech11014) - (CS15BTECH11014)
 
 ## License
 
