@@ -3,13 +3,13 @@ This file handles the gui per tab. It is responsible for creating the gui within
 '''
 
 import os
-import subprocess
 import qdarkgraystyle
 
 from model import Model
 from shutil import copyfile
+from dragdrop import DragLineEdit
 from codeeditor import CodeEditor
-from pdf2image import convert_from_path
+from previewthread import PreviewThread
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap, QImage
@@ -21,6 +21,7 @@ class GeneralWidget(QWidget):
     def __init__(self, parent=None):
         self.model = Model()
         self.type = 'simple'
+        self.prev = ''
         self.window = None
         super(QWidget, self).__init__(parent)
         self.tab = QtWidgets.QWidget()
@@ -142,6 +143,8 @@ class GeneralWidget(QWidget):
         self.gridLayout_4.addWidget(self.widget, 0, 0, 1, 1)
         self.plainTextEdit.setAcceptDrops(False)
         self.plainTextEdit_3.setAcceptDrops(False)
+        self.preview_thread = PreviewThread()
+        self.preview_thread.signal.connect(self.loadPreview)
         self.label.setText("File Name : ")
         self.label_2.setText("Tikz : ")
         self.label_3.setText("GraphML : ")
@@ -170,7 +173,9 @@ class GeneralWidget(QWidget):
         '''Print the message in the text edit at the bottom of the
         horizontal splitter.
         '''
-        self.plainTextEdit_3.insertPlainText(str(msg) + '\n')
+        if self.prev != msg:
+            self.prev = msg
+            self.plainTextEdit_3.appendPlainText(str(msg))
 
     @pyqtSlot()
     def returnedPressedSlot(self):
@@ -292,11 +297,16 @@ class GeneralWidget(QWidget):
         ''' Called when the user drags and drops file on the line edit.
         '''
         if self.lineEdit.text() != '':
+            try:
+                self.window.close()
+            except:
+                pass
             self.returnedPressedSlot()
 
     def loadPreview(self, flag):
         ''' This function loads the preview in a different window.
         '''
+        self.preview_thread.stop()
         if flag:
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
@@ -342,7 +352,9 @@ class GeneralWidget(QWidget):
         if flag == True:
             self.debugPrint(exception + ' in ' + str(self.model.getFileName()))
             self.plainTextEdit.setPlainText('')
+            self.plainTextEdit_2.setPlainText('')
         else:
+            self.debugPrint('Loading Preview....')
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
             fileout = flin + '.tex'
@@ -354,7 +366,6 @@ class GeneralWidget(QWidget):
             tout.close()
             self.plainTextEdit.setPlainText(contents)
             self.plainTextEdit_2.setPlainText(self.model.getGraphML())
-            self.debugPrint('Loading Preview....')
             self.preview(flin)
 
     def refreshAll(self):
@@ -370,7 +381,9 @@ class GeneralWidget(QWidget):
         if flag == True:
             self.debugPrint(exception + ' in ' + str(self.model.getFileName()))
             self.plainTextEdit.setPlainText('')
+            self.plainTextEdit_2.setPlainText('')
         else:
+            self.debugPrint('Loading Preview....')
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
             fileout = flin + '.tex'
@@ -382,35 +395,13 @@ class GeneralWidget(QWidget):
             tout.close()
             self.plainTextEdit.setPlainText(contents)
             self.plainTextEdit_2.setPlainText(self.model.getGraphML())
-            self.debugPrint('Loading Preview....')
             self.preview(flin)
 
     def preview(self, flin):
         ''' This function is called before previewing which initialises threads.
         '''
-        self.preview_thread = CloneThread(flin)
-        self.preview_thread.signal.connect(self.loadPreview)
+        self.preview_thread.set_file(flin)
         self.preview_thread.start()
-
-class DragLineEdit(QtWidgets.QLineEdit):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.setAcceptDrops(True)
-
-    def dragEnterEvent(self, event):
-        ''' Controlling the drag event.
-        '''
-        if event.mimeData().hasUrls():
-            event.accept()
-        else:
-            event.ignore()
-
-    def dropEvent(self, event):
-        ''' Controlling the drop event.
-        '''
-        for url in event.mimeData().urls():
-            print(url.toLocalFile())
-        self.setText(url.toLocalFile())
 
 class PreviewWindow(QWidget):
 
@@ -452,28 +443,3 @@ class PreviewWindow(QWidget):
             os.remove(self.input+'.jpg')
         except:
             pass
-
-class CloneThread(QThread):
-    signal = QtCore.pyqtSignal(bool)
-
-    def __init__(self, file):
-        QThread.__init__(self)
-        self.input = file
-
-    def run(self):
-        _, tail = os.path.split(self.input)
-        ret = subprocess.call([
-            'pdflatex', '-halt-on-error', '-interaction=nonstopmode',
-            self.input + '.tex'])
-        subprocess.call(['pdfcrop',tail + '.pdf'], shell=False)
-        flag = True
-        if ret == 0:
-            pages = convert_from_path( tail + '-crop.pdf')
-            pages[0].save(tail + '.jpg', 'JPEG')
-            flag = True
-        else:
-            flag = False
-        self.signal.emit(flag)
-
-    def stop(self):
-        self.terminate()
