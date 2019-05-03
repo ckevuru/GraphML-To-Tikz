@@ -23,7 +23,7 @@ class GeneralWidget(QWidget):
         super(QWidget, self).__init__(parent)
 
         self.model = Model()
-        self.type = 'simple'
+        self.type = 'advance'
         self.prev = ''
         self.window = None
         
@@ -291,20 +291,20 @@ class GeneralWidget(QWidget):
 
         if self.model.getFileName():
             if self.type == 'simple':
-                self.refreshAllSimple()
-                _translate = QtCore.QCoreApplication.translate
-                self.pushButton_3.setText(
-                    _translate("MainWindow", "Adv-Tikz"))
-                self.type = 'advance'
-                self.debugPrint(
-                    "Simple mode chosen.Output modified.")
-            elif self.type == 'advance':
                 self.refreshAll()
                 _translate = QtCore.QCoreApplication.translate
                 self.pushButton_3.setText(
                     _translate("MainWindow", "Simple Tikz"))
+                self.type = 'advance'
                 self.debugPrint(
                     "Advanced mode chosen.Output modified.")
+            elif self.type == 'advance':
+                self.refreshAllSimple()
+                _translate = QtCore.QCoreApplication.translate
+                self.pushButton_3.setText(
+                    _translate("MainWindow", "Adv-Tikz"))
+                self.debugPrint(
+                    "Simple mode chosen.Output modified.")
                 self.type = 'simple'
         else:
             self.debugPrint("No file specified.")
@@ -328,7 +328,10 @@ class GeneralWidget(QWidget):
                 self.window.close()
             except:
                 pass
-            self.refreshAll()
+            if self.type == 'advance' : 
+                self.refreshAll()
+            else:
+                self.refreshAllSimple()
 
     @pyqtSlot()
     def saveSlot(self):
@@ -433,6 +436,7 @@ class GeneralWidget(QWidget):
         is called, pulling from the model information that is
         updated in the GUI.
         '''
+        self.debugPrint('Hereasdasdasdasdasdsassimp')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.convertSlot()
         if flag == True:
@@ -460,6 +464,7 @@ class GeneralWidget(QWidget):
         '''
         Updates the widgets for simple mode.
         '''
+        self.debugPrint('Hereasdasdasdasdasdsas')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.getFileContents()
         if flag == True:

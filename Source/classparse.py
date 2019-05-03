@@ -48,7 +48,7 @@ class ParseTikz:
         if scale == 0:
             return 0, 0
         else:
-            return round(float(x/scale),2), round(float(y/scale),2)
+            return round(float(x)/float(scale),2), round(float(y)/float(scale),2)
     
     def getTikzFile(self, file_input, flag):
         '''Function for determinig success or failure of conversion.
@@ -358,7 +358,7 @@ class ParseTikz:
                         label = edge['label']
                     elif self.flag == 'advanced':
                         if edge['label'] != '':
-                            fontsize = '\\fontsize{12}{14.4}\\selectfont'
+                            fontsize = '\\fontsize{7}{14.4}\\selectfont'
                             if edge['labelfontstyle'] == 'plain':
                                 label = fontsize + ' ' + edge['label']
                             elif edge['labelfontstyle'] == 'bold':
@@ -424,7 +424,7 @@ class ParseTikz:
                           % (node['id'], str(x), str(y), shape,
                              node['id']+'draw', node['id']+'fill', node['id']+'text', width, node['label']))
             else:
-                fontsize = '\\fontsize{12}{14.4}\\selectfont'
+                fontsize = '\\fontsize{7}{14.4}\\selectfont'
                 if node['labelfontstyle'] == 'plain':
                     label = fontsize + ' ' + node['label']
                 elif node['labelfontstyle'] == 'bold':
