@@ -307,10 +307,10 @@ class GeneralWidget(QWidget):
         ''' This function loads the preview in a different window.
         '''
         self.preview_thread.stop()
+        fileName = self.model.getFileName()
+        flin = os.path.splitext(fileName)[0]
+        _, tail = os.path.split(flin)
         if flag:
-            fileName = self.model.getFileName()
-            flin = os.path.splitext(fileName)[0]
-            _, tail = os.path.split(flin)
             cwd = os.getcwd()
             img_path = cwd + '\\' + tail + '.jpg'
             img = QImage(img_path)
@@ -335,6 +335,11 @@ class GeneralWidget(QWidget):
         else:
             try:
                 self.window.close()
+                os.remove(flin+'.tex')
+                os.remove(tail+'.log')
+                os.remove(tail + '.aux')
+                os.remove(tail + '.pdf')
+                os.remove(tail+'-crop.pdf')
             except:
                 pass
             self.debugPrint("Preview failed due to latex compilation error.")
@@ -370,11 +375,7 @@ class GeneralWidget(QWidget):
 
     def refreshAll(self):
         '''
-        Updates the widgets whenever an interaction happens.
-        Typically some interaction takes place, the UI responds,
-        and informs the model of the change.  Then this method
-        is called, pulling from the model information that is
-        updated in the GUI.
+        Updates the widgets for simple mode.
         '''
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.getFileContents()
