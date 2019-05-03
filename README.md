@@ -89,11 +89,18 @@ Another way of execution is using an executable. Below we provide links for exec
 
 ### Windows
 
-Download Windows executable [here]().
+Download Windows executable [here](https://github.com/ckevuru/GraphML-To-Tikz/master/Executables/).
+After extracting from Windows_Gr-To-Tik.zip open GraphML-To-Tikz directory and click on GraphML-To-Tikz.exe to run a standalone executable.
+
+```text
+Windows_Gr-To-Tik -> GraphML-To-Tikz -> GraphML-To-Tikz.exe
+```
 
 ### Ubuntu
 
-Download Ubuntu executable [here]().
+Download Ubuntu executable [here](https://github.com/ckevuru/GraphML-To-Tikz/master/Executables/).
+
+Follow the same instructions as Windows executable to run the file.
 
 ## How to use?
 
