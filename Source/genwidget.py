@@ -19,154 +19,234 @@ from PyQt5.QtWidgets import QLabel, QMainWindow, QApplication, QPushButton, QWid
 
 class GeneralWidget(QWidget):
     def __init__(self, parent=None):
+        
+        super(QWidget, self).__init__(parent)
+
         self.model = Model()
         self.type = 'simple'
         self.prev = ''
         self.window = None
-        super(QWidget, self).__init__(parent)
+        
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
+        
         self.gridLayout_4 = QtWidgets.QGridLayout(self.tab)
         self.gridLayout_4.setObjectName("gridLayout_4")
+        
         self.widget = QtWidgets.QWidget(self.tab)
         self.widget.setObjectName("widget")
+        
         self.gridLayout_3 = QtWidgets.QGridLayout(self.widget)
         self.gridLayout_3.setContentsMargins(-1, 0, -1, -1)
         self.gridLayout_3.setObjectName("gridLayout_3")
+        
         self.splitter = QtWidgets.QSplitter(self.widget)
         self.splitter.setOrientation(QtCore.Qt.Vertical)
         self.splitter.setObjectName("splitter")
+        
         self.frame = QtWidgets.QFrame(self.splitter)
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+        
         self.gridLayout = QtWidgets.QGridLayout(self.frame)
         self.gridLayout.setContentsMargins(0, 0, 0, 3)
         self.gridLayout.setObjectName("gridLayout")
+        
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
+        
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
+        
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setContentsMargins(-1, -1, -1, 4)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        
         self.label = QtWidgets.QLabel(self.frame)
+        
         font = QtGui.QFont()
         font.setFamily("MS Shell Dlg 2")
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
+        
         self.label.setFont(font)
         self.label.setStyleSheet(
             "font: 10pt \"MS Shell Dlg 2\";color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
+        
         self.horizontalLayout.addWidget(self.label)
+        
         self.lineEdit = DragLineEdit(self.frame)
         self.lineEdit.setObjectName("lineEdit")
+        
         self.horizontalLayout.addWidget(self.lineEdit)
+        
         self.pushButton = QtWidgets.QPushButton(self.frame)
         self.pushButton.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.pushButton.setObjectName("pushButton")
+        
         self.horizontalLayout.addWidget(self.pushButton)
+        
         self.pushButton_5 = QtWidgets.QPushButton(self.frame)
         self.pushButton_5.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.pushButton_5.setObjectName("pushButton_5")
+        
         self.horizontalLayout.addWidget(self.pushButton_5)
+        
         self.verticalLayout.addLayout(self.horizontalLayout)
+        
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        
         self.label_2 = QtWidgets.QLabel(self.frame)
+        
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
+        
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        
         self.horizontalLayout_3.addWidget(self.label_2)
         spacerItem = QtWidgets.QSpacerItem(
             188, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        
         self.horizontalLayout_3.addItem(spacerItem)
+        
         self.label_3 = QtWidgets.QLabel(self.frame)
+        
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
+        
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+        
         self.horizontalLayout_3.addWidget(self.label_3)
         spacerItem1 = QtWidgets.QSpacerItem(
             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
+        
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.verticalLayout_2.addLayout(self.verticalLayout)
+        
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        
         self.plainTextEdit = CodeEditor(self.frame)
         self.plainTextEdit.setStyleSheet("font: 10pt \"Courier New\";")
         self.plainTextEdit.setObjectName("plainTextEdit")
+        
         self.horizontalLayout_4.addWidget(self.plainTextEdit)
+        
         self.plainTextEdit_2 = CodeEditor(self.frame)
         self.plainTextEdit_2.setStyleSheet("font: 10pt \"Courier New\";")
         self.plainTextEdit_2.setObjectName("plainTextEdit_2")
+        
         self.horizontalLayout_4.addWidget(self.plainTextEdit_2)
+        
         self.verticalLayout_2.addLayout(self.horizontalLayout_4)
+        
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        
         self.label_4 = QtWidgets.QLabel(self.frame)
         self.label_4.setObjectName("label_4")
+        
         self.horizontalLayout_2.addWidget(self.label_4)
         spacerItem2 = QtWidgets.QSpacerItem(
             173, 22, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
+        
         self.pushButton_3 = QtWidgets.QPushButton(self.frame)
         self.pushButton_3.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.pushButton_3.setObjectName("pushButton_3")
+        
         self.horizontalLayout_2.addWidget(self.pushButton_3)
+        
         self.pushButton_4 = QtWidgets.QPushButton(self.frame)
         self.pushButton_4.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.pushButton_4.setObjectName("pushButton_4")
+        
         self.horizontalLayout_2.addWidget(self.pushButton_4)
+        
         self.pushButton_2 = QtWidgets.QPushButton(self.frame)
         self.pushButton_2.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.pushButton_2.setObjectName("pushButton_2")
+        
         self.horizontalLayout_2.addWidget(self.pushButton_2)
+        
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+        
         self.gridLayout.addLayout(self.verticalLayout_3, 0, 0, 1, 1)
+        
         self.plainTextEdit_3 = CodeEditor(self.splitter)
+        
         self.splitter.setSizes([300, 100])
+        
         self.plainTextEdit_3.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.plainTextEdit_3.setObjectName("plainTextEdit_3")
+        
         self.gridLayout_3.addWidget(self.splitter, 0, 0, 1, 1)
+        
         self.gridLayout_4.addWidget(self.widget, 0, 0, 1, 1)
+        
         self.plainTextEdit.setAcceptDrops(False)
         self.plainTextEdit_3.setAcceptDrops(False)
+        
         self.preview_thread = PreviewThread()
         self.preview_thread.signal.connect(self.loadPreview)
+        
         self.label.setText("File Name : ")
+        
         self.label_2.setText("Tikz : ")
+        
         self.label_3.setText("GraphML : ")
+        
         self.label_4.setText("Debug Logs : ")
+        
         self.label_2.setStyleSheet(
             "font: 10pt \"MS Shell Dlg 2\";color: rgb(255, 255, 255);")
+        
         self.label_3.setStyleSheet(
             "font: 10pt \"MS Shell Dlg 2\";color: rgb(255, 255, 255);")
+        
         self.label_4.setStyleSheet(
             "font: 10pt \"MS Shell Dlg 2\";color: rgb(255, 255, 255);")
+        
         self.pushButton.setText("Browse")
+        
         self.pushButton_3.setText("Simple-Tikz")
+        
         self.pushButton_2.setText("Save")
+        
         self.pushButton_4.setText("Refresh")
+        
         self.pushButton_5.setIcon(QtGui.QIcon('../Images/refresh.png'))
+        
         self.pushButton.clicked.connect(self.browseSlot)
+        
         self.lineEdit.returnPressed.connect(self.returnedPressedSlot)
+        
         self.pushButton_3.clicked.connect(self.convertSlot)
+        
         self.pushButton_4.clicked.connect(self.reloadSlot)
+        
         self.pushButton_2.clicked.connect(self.saveSlot)
-        self.lineEdit.textChanged.connect(self.draganddrop)
+        
+        #self.lineEdit.textChanged.connect(self.draganddrop)
+        
         self.pushButton_5.clicked.connect(self.refreshSlot)
+        
         self.setLayout(self.gridLayout_4)
 
     def debugPrint(self, msg):
@@ -184,6 +264,7 @@ class GeneralWidget(QWidget):
         '''
         fileName = self.lineEdit.text()
         extension = os.path.splitext(fileName)[1]
+        self.debugPrint("Converting file : " + fileName)
         if self.model.isValid(fileName) and extension == '.graphml':
             self.model.setFileName(self.lineEdit.text())
             if self.type == 'simple':
@@ -197,7 +278,7 @@ class GeneralWidget(QWidget):
             m.setStandardButtons(QtWidgets.QMessageBox.Ok
                                  | QtWidgets.QMessageBox.Cancel)
             m.setDefaultButton(QtWidgets.QMessageBox.Cancel)
-            ret = m.exec_()
+            m.exec_()
             self.lineEdit.setText("")
             self.plainTextEdit.setPlainText("")
             self.plainTextEdit_2.setPlainText("")
@@ -241,7 +322,7 @@ class GeneralWidget(QWidget):
             filter="*.graphml",
             options=options)
         if fileName:
-            self.debugPrint("setting file name: " + fileName)
+            self.debugPrint("Converting file : " + fileName)
             self.model.setFileName(fileName)
             try:
                 self.window.close()
@@ -356,10 +437,10 @@ class GeneralWidget(QWidget):
         flag, exception, contents = self.model.convertSlot()
         if flag == True:
             self.debugPrint(exception + ' in ' + str(self.model.getFileName()))
+            self.debugPrint('Conversion for file : ' + str(self.model.getFileName()) + ' failed.')
             self.plainTextEdit.setPlainText('')
             self.plainTextEdit_2.setPlainText('')
         else:
-            self.debugPrint('Loading Preview....')
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
             fileout = flin + '.tex'
@@ -371,6 +452,8 @@ class GeneralWidget(QWidget):
             tout.close()
             self.plainTextEdit.setPlainText(contents)
             self.plainTextEdit_2.setPlainText(self.model.getGraphML())
+            self.debugPrint('Conversion for file : ' + str(self.model.getFileName()) + ' successful.')
+            self.debugPrint('Loading Preview....')
             self.preview(flin)
 
     def refreshAll(self):
@@ -381,10 +464,10 @@ class GeneralWidget(QWidget):
         flag, exception, contents = self.model.getFileContents()
         if flag == True:
             self.debugPrint(exception + ' in ' + str(self.model.getFileName()))
+            self.debugPrint('Conversion for file : ' + str(self.model.getFileName()) + ' failed.')
             self.plainTextEdit.setPlainText('')
             self.plainTextEdit_2.setPlainText('')
         else:
-            self.debugPrint('Loading Preview....')
             fileName = self.model.getFileName()
             flin = os.path.splitext(fileName)[0]
             fileout = flin + '.tex'
@@ -396,6 +479,8 @@ class GeneralWidget(QWidget):
             tout.close()
             self.plainTextEdit.setPlainText(contents)
             self.plainTextEdit_2.setPlainText(self.model.getGraphML())
+            self.debugPrint('Conversion for file : ' + str(self.model.getFileName()) + ' successful.')
+            self.debugPrint('Loading Preview....')
             self.preview(flin)
 
     def preview(self, flin):

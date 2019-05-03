@@ -1,10 +1,10 @@
 import os
 import subprocess
 
-from pdf2image import convert_from_path
-
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import QThread
+
+from pdf2image import convert_from_path
 
 class PreviewThread(QThread):
     signal = QtCore.pyqtSignal(bool)
