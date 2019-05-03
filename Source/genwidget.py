@@ -395,10 +395,9 @@ class GeneralWidget(QWidget):
         flin = os.path.splitext(fileName)[0]
         _, tail = os.path.split(flin)
         if flag:
-            cwd = os.getcwd()
-            img_path = cwd + '\\' + tail + '.jpg'
+            img_path = tail + '.jpg'
             img = QImage(img_path)
-            self.window = PreviewWindow(cwd + '\\' + tail)
+            self.window = PreviewWindow(tail)
             pixmap = QPixmap(img_path)
             self.window.setPicSize(img.width(), img.height())
             self.window.label.setPixmap(pixmap.scaled(
@@ -436,7 +435,7 @@ class GeneralWidget(QWidget):
         is called, pulling from the model information that is
         updated in the GUI.
         '''
-        self.debugPrint('Hereasdasdasdasdasdsassimp')
+        #self.debugPrint('Hereasdasdasdasdasdsassimp')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.convertSlot()
         if flag == True:
@@ -464,7 +463,7 @@ class GeneralWidget(QWidget):
         '''
         Updates the widgets for simple mode.
         '''
-        self.debugPrint('Hereasdasdasdasdasdsas')
+        #self.debugPrint('Hereasdasdasdasdasdsas')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.getFileContents()
         if flag == True:
