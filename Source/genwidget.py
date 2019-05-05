@@ -23,7 +23,7 @@ class GeneralWidget(QWidget):
         super(QWidget, self).__init__(parent)
 
         self.model = Model()
-        self.type = 'advance'
+        self.type = 'simple'
         self.prev = ''
         self.window = None
         
@@ -291,20 +291,20 @@ class GeneralWidget(QWidget):
 
         if self.model.getFileName():
             if self.type == 'simple':
-                self.refreshAll()
-                _translate = QtCore.QCoreApplication.translate
-                self.pushButton_3.setText(
-                    _translate("MainWindow", "Simple Tikz"))
-                self.type = 'advance'
-                self.debugPrint(
-                    "Advanced mode chosen.Output modified.")
-            elif self.type == 'advance':
                 self.refreshAllSimple()
                 _translate = QtCore.QCoreApplication.translate
                 self.pushButton_3.setText(
                     _translate("MainWindow", "Adv-Tikz"))
+                self.type = 'advance'
                 self.debugPrint(
                     "Simple mode chosen.Output modified.")
+            elif self.type == 'advance':
+                self.refreshAll()
+                _translate = QtCore.QCoreApplication.translate
+                self.pushButton_3.setText(
+                    _translate("MainWindow", "Simple Tikz"))
+                self.debugPrint(
+                    "Advanced mode chosen.Output modified.")
                 self.type = 'simple'
         else:
             self.debugPrint("No file specified.")
@@ -328,10 +328,7 @@ class GeneralWidget(QWidget):
                 self.window.close()
             except:
                 pass
-            if self.type == 'advance' : 
-                self.refreshAll()
-            else:
-                self.refreshAllSimple()
+            self.refreshAll()
 
     @pyqtSlot()
     def saveSlot(self):
@@ -395,9 +392,10 @@ class GeneralWidget(QWidget):
         flin = os.path.splitext(fileName)[0]
         _, tail = os.path.split(flin)
         if flag:
-            img_path = tail + '.jpg'
+            cwd = os.getcwd()
+            img_path = cwd + '\\' + tail + '.jpg'
             img = QImage(img_path)
-            self.window = PreviewWindow(tail)
+            self.window = PreviewWindow(cwd + '\\' + tail)
             pixmap = QPixmap(img_path)
             self.window.setPicSize(img.width(), img.height())
             self.window.label.setPixmap(pixmap.scaled(
@@ -435,7 +433,6 @@ class GeneralWidget(QWidget):
         is called, pulling from the model information that is
         updated in the GUI.
         '''
-        #self.debugPrint('Hereasdasdasdasdasdsassimp')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.convertSlot()
         if flag == True:
@@ -463,7 +460,6 @@ class GeneralWidget(QWidget):
         '''
         Updates the widgets for simple mode.
         '''
-        #self.debugPrint('Hereasdasdasdasdasdsas')
         self.lineEdit.setText(self.model.getFileName())
         flag, exception, contents = self.model.getFileContents()
         if flag == True:
