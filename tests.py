@@ -1,9 +1,12 @@
 import os
+import pdf2image
 import qdarkgraystyle
 
 from shutil import copyfile
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QIcon, QPixmap, QImage
-from PyQt5.QtCore import QObject, pyqtSlot, QThread, pyqtSignal, QSize
-from PyQt5.QtWidgets import QLabel, QMainWindow, QApplication, QPushButton, QWidget, QAction, QTabWidget, QVBoxLayout, QDialog 
+from PyQt5.Qt import PYQT_VERSION_STR
+
+if __name__ == "__main__":
+    print("PyQt version : ", PYQT_VERSION_STR)
+    print("QDarkGrayStyle version : ",qdarkgraystyle.__version__)
+    print("Pdf2Image verification : ",pdf2image.__package__)
