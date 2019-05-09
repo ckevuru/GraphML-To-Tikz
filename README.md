@@ -1,6 +1,6 @@
 # GraphML To Tikz Converter
 
-[![Issues](https://img.shields.io/github/issues/ckevuru/GraphML-To-Tikz.svg)](https://github.com/ckevuru/GraphML-To-Tikz/issues)
+[![Build Status](https://travis-ci.com/ckevuru/GraphML-To-Tikz.svg?branch=master)](https://travis-ci.com/ckevuru/GraphML-To-Tikz)
 [![Stars](https://img.shields.io/github/stars/ckevuru/GraphML-To-Tikz.svg)](https://github.com/ckevuru/GraphML-To-Tikz/stargazers)
 [![Csontributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ckevuru/GraphML-To-Tikz/issues)
 [![License](https://img.shields.io/github/license/ckevuru/GraphML-To-Tikz.svg)](https://github.com/ckevuru/GraphML-To-Tikz/issues)
