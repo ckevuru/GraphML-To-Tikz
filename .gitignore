@@ -3,3 +3,4 @@
 *.graphml
 *.log
 *.jpg
+.vscode/
